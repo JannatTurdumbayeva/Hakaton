@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for new in news %}
+<div class="card-group">
+  <div class="card mb-4">
+    <div class="card-body">
+      <p class="card-text">{{ new }}</p>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
