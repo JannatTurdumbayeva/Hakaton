@@ -5,3 +5,5 @@ dj-database-url==0.3.0
 gunicorn==19.6.0
 python-decouple==3
 whitenoise==3.2
+lxml
+requests
