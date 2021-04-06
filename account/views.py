@@ -46,4 +46,4 @@ def registration_view(request):
     context = {
         'form': form,
     }
-    return render(request, 'registration.html', context)
+    return render(request, 'account/registration.html', context)
