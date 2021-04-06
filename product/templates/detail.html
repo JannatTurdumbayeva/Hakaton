@@ -14,16 +14,17 @@
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">{{ product.description }}</p>
-          <h5>{{product.price}} сом</h5>
-          {%if product.status == 'in stock'%}
+        <p class="card-text">{{ product.description }}</p>
+        <h5>{{product.price}} сом</h5>
+        {%if product.status == 'in stock'%}
           <p style="color: green" class="card-text">{{ product.status }}</p>
           <a href="{% url 'cart_add' product.id %}" class="btn btn-success">Add To Cart</a>
-          {%elif product.status == 'out of stock'%}
+        {%elif product.status == 'out of stock'%}
           <p style="color: red" class="card-text">{{ product.status }}</p>
-          {%else%}
+        {%else%}
           <p style="color: yellow" class="card-text">{{ product.status }}</p>
-          {%endif%}
+        {%endif%}
+        <form action="{% url 'request:add_comment' request.slug %}" enctype = "multiparty/form-data" method = "post"></form>
       </div>
     </div>
   </div>
