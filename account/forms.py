@@ -1,5 +1,7 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+from account.models import User
 
 
 class RegistrationForm(forms.ModelForm):
@@ -15,16 +17,16 @@ class RegistrationForm(forms.ModelForm):
         else:
             return data
 
-    def save(self, commit=True):
-        user = User.objects.create_user(**self.cleaned_data)
-        return user
-
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError('A user with the same name already exists')
         return username
 
+    def save(self, commit=True):
+        user = User.objects.create_user(**self.cleaned_data)
+        return user
+
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('username', 'email', 'password', 'password_confirmation')

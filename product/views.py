@@ -125,3 +125,9 @@ def cart_clear(request):
 @login_required(login_url="/account/login/")
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
+
+
+class ReviewIndexPage(ListView):
+    model = ReviewProduct
+    template_name = 'review_page.html'
+    context_object_name = 'all_reviews'

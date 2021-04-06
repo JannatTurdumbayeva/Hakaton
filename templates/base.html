@@ -23,6 +23,9 @@
                     <span>{{ request.user.username }}</span>
                     <a href="{% url 'cart_detail' %}" class="btn btn-success">Cart</a>
                 {% endif %}
+
+				<a href="{% url 'create-product' %}">Create Product</a>
+
                 <form class="d-flex" method="get" action="{% url 'search' %}" style="margin-top:30px">
                 <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>

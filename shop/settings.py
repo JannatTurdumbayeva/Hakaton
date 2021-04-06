@@ -145,3 +145,5 @@ LOGIN_URL = 'account/login/'
 LOGOUT_REDIRECT_URL = '/'
 
 CART_SESSION_ID = 'cart'
+
+AUTH_USER_MODEL = 'account.User'
