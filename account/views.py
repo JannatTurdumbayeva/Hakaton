@@ -12,7 +12,7 @@ class RegisterView(CreateView):
     success_url = reverse_lazy('home')
 
 
-class SighInView(LoginView):
+class LogInView(LoginView):
     template_name = 'account/login.html'
     success_url = reverse_lazy('home')
 

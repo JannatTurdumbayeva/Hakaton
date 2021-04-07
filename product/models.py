@@ -51,12 +51,14 @@ class Product(models.Model):
         ordering = ['-id', ]
 
 
-class ReviewProduct(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews', verbose_name='Product')
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product', verbose_name='Product')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', verbose_name='User')
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
 
     def str(self):
         return f'{self.user} has left review on product: {self.product}'
+
+    class Meta:
+        ordering = ['-created']

@@ -8,17 +8,19 @@
   <img src="{{ value.image }}" class="card-img-top" alt="...">
   <div class="card-body">
     <p class="card-text">Name: {{value.name}}</p>
-    <p class="card-text">Price: {{value.price}} сом</p>
+    <p class="card-text">Price: ${{value.price}}</p>
     <p class="card-text">Quantity: {{value.quantity}}</p>
-      <p class="card-text">Total cost: {{ value.price|multiply:value.quantity }} сом</p>
+    <p class="card-text">Total cost: ${{ value.price|multiply:value.quantity }}</p>
   </div>
-      <div class="botton">
+    <div class="button">
       <a href="{% url 'item_increment' value.product_id %}" class="btn btn-success">Increament</a>
+      {% if value.quantity != 1 %}
       <a href="{% url 'item_decrement' value.product_id %}" class="btn btn-danger">Decrement</a>
+      {% endif %}
     </div>
-
 </div>
 {% endfor %}
 </div>
+<br>
 <a id="clear" href="{% url 'cart_clear' %}" class="btn btn-danger">Clear Cart</a>
 {% endblock %}

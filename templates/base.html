@@ -14,7 +14,7 @@
 
 		<!-- Header -->
 			<header id="header" style="height:60px">
-				<a class="logo" href="{% url 'home' %}" style="margin-top:15px">Home</a>
+				<a class="logo" href="{% url 'home' %}" style="margin-top:5px"><img src="{% static 'images/logo2.jpg' %}" alt="logo" style="height:45px;width:45px"></a>
 				<a href="{% url 'news' %}" style="color: white">News</a>
                 {% if not request.user.is_authenticated %}
                     <a href="{% url 'signup' %}" class="navbar-brand" style="color:#6c757d" >Sign up</a>
@@ -27,7 +27,7 @@
 
 
 
-                <form class="d-flex" method="get" action="{% url 'search' %}" style="margin-top:30px">
+                <form class="d-flex" method="get" action="{% url 'search' %}" style="margin-top:30px; margin-right:30px">
                 <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
                 </form>

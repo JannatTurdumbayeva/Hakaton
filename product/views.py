@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.urls import reverse_lazy
 from django.views.generic import *
 from .forms import *
 
@@ -77,6 +78,34 @@ class ProductDeleteView(DeleteView):
         return reverse('home')
 
 
+class CommentPage(ListView):
+    model = Comment
+    template_name = 'list_comments.html'
+    context_object_name = 'list_comments'
+
+
+class CommentCreateView(CreateView):
+    model = Comment
+    template_name = 'comment.html'
+    form_class = CreateCommentForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        product = self.kwargs.get('id')
+        user = self.request.user
+        post = Product.objects.get(id=product)
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.user = user
+        comment.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_form'] = self.get_form(self.get_form_class())
+        return context
+
+
 # shoping card
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -111,8 +140,11 @@ def item_increment(request, id):
 def item_decrement(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
-    cart.decrement(product=product)
-    return redirect("cart_detail")
+    if product:
+        cart.decrement(product=product)
+        return redirect("cart_detail")
+    else:
+        return redirect("cart-detail")
 
 
 @login_required()
@@ -125,9 +157,3 @@ def cart_clear(request):
 @login_required(login_url="/account/login/")
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
-
-
-class ReviewIndexPage(ListView):
-    model = ReviewProduct
-    template_name = 'review_page.html'
-    context_object_name = 'all_reviews'
