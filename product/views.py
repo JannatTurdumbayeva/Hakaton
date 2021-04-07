@@ -88,17 +88,19 @@ class CommentCreateView(CreateView):
     model = Comment
     template_name = 'comment.html'
     form_class = CreateCommentForm
-    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
-        product = self.kwargs.get('id')
+        product = self.kwargs['product_id']
         user = self.request.user
-        post = Product.objects.get(id=product)
+        print(product)
+        product = Product.objects.get(id=product)
         comment = form.save(commit=False)
-        comment.post = post
+        comment.product = product
         comment.user = user
         comment.save()
         return super().form_valid(form)
+
+    success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
