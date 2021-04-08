@@ -8,19 +8,24 @@
 {% endblock %}
 
 {% block content %}
-<ol>
 {% for category in categories %}
 {% if category.products.all %}
-<li>
-    <div class="card">
-        <img src="{{ category.image.url }}" class="card-img-top" alt="..." style="width:200px;height:auto">
-        <a href="{{ category.get_absolute_url }}"><p class="card-text">{{category.title}}</p></a>
-        <p class="card-text">{{category.products.count}}</p>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <img src="{{ category.image.url }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <a href="{{ category.get_absolute_url }}" style="color:black; text-decoration:none"><h1 class="card-title">{{category.title}}</h1></a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Amount of products: {{category.products.count}}</small>
+      </div>
     </div>
-</li>
+  </div>
+</div>
+
 {% endif %}
 {% endfor %}
-</ol>
 </div>
 {% endblock %}
 

@@ -22,6 +22,9 @@ class Category(models.Model):
             return f'{self.parent} --> {self.title}'
         return self.title
 
+    class Meta:
+        ordering = ['title']
+
 
 class Product(models.Model):
     STATUS_CHOICES = (
@@ -37,7 +40,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category,
                                  on_delete=models.CASCADE,
                                  related_name='products')
-    status = models.CharField(choices=STATUS_CHOICES,max_length=20)
+    status = models.CharField(choices=STATUS_CHOICES, max_length=20)
 
     def __str__(self):
         return self.name
