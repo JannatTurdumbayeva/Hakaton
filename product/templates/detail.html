@@ -34,18 +34,15 @@
         </div>
       </div>
     </div>
-        <h4>Comments...</h4>
+    <div class="card">
+        <br>
+        <h4 class="card-body">Comments...</h4>
         <br/>
         {% if not product.product.all %}
             No comments yet...
-            {% if request.user.is_authenticated %}
-            <button type="submit" class="btn btn-secondary" style="width:100%; height:40px"><a href="{% url 'add_comment' product.id %}"  style="color:#fff; text-decoration:none"> Add one</a></button>
-            {% endif %}
         {% else %}
-            {% if request.user.is_authenticated %}
-            <button type="submit" class="btn btn-secondary" style="width:100%; height:40px"><a href="{% url 'add_comment' product.id %}"  style="color:#fff; text-decoration:none">Add comment</a></button>
-            {% endif %}
             <br/>
+            <div class="card-body">
             {% for comment in product.product.all %}
                 <strong>
                     {{ comment.user }} -
@@ -56,8 +53,9 @@
                 <br/><br/>
                 <hr>
             {% endfor %}
+        </div>
         {% endif %}
-
+    </div>
 
 
 
