@@ -22,7 +22,7 @@
                 {% else %}
                     <a href="{% url 'logout' %}" class="navbar-brand" style="color:#6c757d" >Log out</a>
                     <span>{{ request.user.username }}</span>
-                    <a href="{% url 'cart_detail' %}" class="btn btn-success">Cart</a>
+					<a href="{% url 'cart_detail' %}" style="margin-top:5px"><img src="{% static 'images/cart.png' %}" alt="cart" style="height:30px;width:30px"></a>
                 {% endif %}
 
 
